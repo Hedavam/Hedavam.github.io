@@ -1,7 +1,7 @@
 ---
 title: "About"
 image: profile.jpg
-about:
+about: "Hey, it's me, Hedavam."
   template: jolla
   links:
     - icon: twitter
