@@ -57,6 +57,7 @@ class Perceptron:
         #Returns np.array of y_ (predicted labels)
         
     def score(self, X,y): #accuracy
+        
         accuracy = ((self.predict(X) == y).mean()) #predict(X) returns array of y_ (predicted labels); this line calculates accuracy as #y_ == y checks if prediction = label and returns 0 or 1 for each check for all samples; .mean() helps us do it all in one line without loops or writing out math
         self.history.append(accuracy)   
         return accuracy #at each iteration; #formula for accuracy is 1/n * sum (for all n samples) of the indicator of (y_ == y); basically checks for all samples if the predicted label = actual label; if so add 1 to sum, otherwise add 0; divide by # samples 
