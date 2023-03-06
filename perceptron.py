@@ -26,9 +26,16 @@ class Perceptron:
         for i in range(max_steps): #loop throuh vector of weights; stopping prematurely if the algo. converges (accuracy = 1)
             
             #Perceptron update rule #refer to https://middlebury-csci-0451.github.io/CSCI-0451/assignments/blog-posts/blog-post-perceptron.html
-            #convert actual labels (y w/ 0 and 1 values) to -1 and 1, which helps numpy go fast with 2*label - 1
-            self.w = self.w + (1*(((2*yi-1) * self.w@xi) < 0) * ((2*yi-1) *xi)) #will only add the righthandside and update self.w if labels are different 
-            
+           
+            self.w = self.w + (1*(((2*yi-1) * self.w@xi) <= 0) * ((2*yi-1)*xi)) #will only add the righthandside and update self.w if labels are different 
+           
+            #More info:
+            #convert actual labels y, w/ 0 and 1 values to -1 and 1 w/ 2*label - 1!
+            #self.w@xi gives us our activation! #it's okay to perform update if it's 0, because we will still end up ignoring the sample vector; the only way for activation to be 0 is for the sample vector xi to be 0, so our update rule will not affect parameter vector
+            #NOTE: If we initialize the weight vector to 0 instead of making it random, the first update (barring that our sample vector xi) will correctly change our parameter vector
+            #if labels are different (our boolean check returns 1), so we increase parameter vector by -1 or 1 (converted labels - given by 2*label - 1) multiplied by the current sample vector; thus, moving our prediction for the current sample in the right direction for the current sample
+
+
             #different set of predictions and different accuracy every iteration because of the weights and bias changing    
             #update accuracy history and predictions every iteration
             self.predict(X)
@@ -63,7 +70,6 @@ class Perceptron:
         return accuracy #at each iteration; #formula for accuracy is 1/n * sum (for all n samples) of the indicator of (y_ == y); basically checks for all samples if the predicted label = actual label; if so add 1 to sum, otherwise add 0; divide by # samples 
     
         
-            
             
               
                 
