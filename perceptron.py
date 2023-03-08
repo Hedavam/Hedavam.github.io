@@ -7,8 +7,16 @@ class Perceptron:
         self.history = [] #to store accuracy history updated each iteration
         
         
-    def fit(self, X, y, max_steps):  #passing in Matrix X w/ n observations and n features #Passing vector y of labels w/ 0s and 1s
-        
+    def fit(self, X, y, max_steps):  #passing in Matrix X w/ n samples and n features #Passing vector y of labels w/ 0s and 1s
+        """
+        This function fits our perceptron model to the data
+
+        param X: matrix w/ n samples
+        param y: vector of actual lables (0s and 1s)
+        param max_steps: specifies the number of maximum steps for which we will perfom the perceptron update rule
+
+        no return value, but parameter vector is finalized to a good linear predictor as determined by our model 
+        """
         X_ = np.append(X, np.ones((X.shape[0], 1)), 1) #Modifiying our given feature array by adding column of 1's so we could (in combination w/ using w_) disregard bias updating
         
         self.w = np.random.rand(X_.shape[1]) #Initializing random vector representing w_
@@ -23,7 +31,7 @@ class Perceptron:
         
  
 
-        for i in range(max_steps): #loop throuh vector of weights; stopping prematurely if the algo. converges (accuracy = 1)
+        for i in range(max_steps): #loop throuh vector of weights max_steps times; stopping prematurely if the algo. converges (accuracy = 1)
             
             #Perceptron update rule #refer to https://middlebury-csci-0451.github.io/CSCI-0451/assignments/blog-posts/blog-post-perceptron.html
            
@@ -53,7 +61,14 @@ class Perceptron:
             
                               
         
-    def predict(self, X): #loop through all of the x features and y labels in X???? b
+    def predict(self, X): #loop through all of the x features and y labels in X
+        '''
+        This function predicts labels for each sample according to our perceptron model; positive activation returns 1 while negative activation returns 0
+        
+        param X: matrix w/ n samples
+        
+        returns vector of predicted labels {0,1}
+        '''
         
         X_ = np.append(X, np.ones((X.shape[0], 1)), 1) #Modifiying our given feature array by adding column of 1's so we could (in combination w/ using w_) disregard bias updating
         
@@ -64,6 +79,15 @@ class Perceptron:
         #Returns np.array of y_ (predicted labels)
         
     def score(self, X,y): #accuracy
+        '''
+        This function predicts the model's accuracy representing the proportion of how many predicted labels match the actual labels
+
+        param X: matrix w/ n samples
+
+        param y: vector of actual lables (0s and 1s)
+
+        returns the accuracy of the perceptron as a number between 0 and 1, with 1 corresponding to perfect classification.
+        '''
         
         accuracy = ((self.predict(X) == y).mean()) #predict(X) returns array of y_ (predicted labels); this line calculates accuracy as #y_ == y checks if prediction = label and returns 0 or 1 for each check for all samples; .mean() helps us do it all in one line without loops or writing out math
         self.history.append(accuracy)   
