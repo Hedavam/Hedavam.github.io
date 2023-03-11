@@ -2,6 +2,9 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/Classifying Palmer Penguins - ML Workflow/index.html",
+      "/posts/Linear Regression/Untitled.html",
+      "/posts/Optimization for Logistic Regression/index.html",
       "/posts/Perceptron-Blog-Post/index.html",
       "/posts/example-blog-post/index.html"
     ]

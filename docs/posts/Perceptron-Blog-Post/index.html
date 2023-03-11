@@ -222,7 +222,7 @@ background-size: cover;
 <pre><code>- 1*(((2*yi-1) * self.w@xi) &lt;= 0) indicator function returns 1 if labels don't match and 0 if they do. 
 - if labels don't match we add y (-1 or 1 representation of actual label) multiplied by xi (our sample vector) to our parameter vector in either the positive or negative direction, depending on our actual label's value; 0 or -1 (negative direction); 1 or +1 (positive direction)</code></pre>
 <p>NOTE: In order to account for bias we modifiy our given feature matrix by adding column of 1’s and expand our weight vector to have an extra column (to store bias in).</p>
-<div class="cell" data-execution_count="1">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -234,7 +234,7 @@ background-size: cover;
 </section>
 <section id="linearly-separable-example-1" class="level1">
 <h1>Linearly Separable Example 1</h1>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>weight <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> [] </span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>max_steps <span class="op">=</span> <span class="dv">10000</span></span>
@@ -268,7 +268,7 @@ background-size: cover;
 </div>
 </div>
 <p>In this example the perceptron algorithm reaches a score of 1.0, meaning it was able to succesfully linearly separate the data.</p>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c <span class="op">=</span> y) <span class="co">#means [ first_row:last_row , column_0]</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Feature 1"</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Feature 2"</span>)</span>
@@ -289,7 +289,7 @@ background-size: cover;
 </div>
 </div>
 <p>Visualization of the perceptron’s resulting linear separator</p>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.plot(p.history) </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Iteration"</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Accuracy"</span>)</span>
@@ -302,7 +302,7 @@ background-size: cover;
 </section>
 <section id="linearly-separable-example-2" class="level1">
 <h1>Linearly Separable Example 2</h1>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>weight2 <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>history2 <span class="op">=</span> [] </span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>max_steps <span class="op">=</span> <span class="dv">1000000</span></span>
@@ -337,7 +337,7 @@ background-size: cover;
 </div>
 </div>
 <p>In this example the perceptron algorithm reaches a score of 1.0, meaning it was able to succesfully linearly separate the data.</p>
-<div class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.scatter(X2[:,<span class="dv">0</span>], X2[:,<span class="dv">1</span>], c <span class="op">=</span> y2) </span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Feature 1"</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Feature 2"</span>)</span>
@@ -358,7 +358,7 @@ background-size: cover;
 </div>
 </div>
 <p>Visualization of the perceptron’s resulting linear separator</p>
-<div class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.plot(p2.history) </span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Iteration"</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Accuracy"</span>)</span>
@@ -371,7 +371,7 @@ background-size: cover;
 </section>
 <section id="non-linearly-separable-example" class="level1">
 <h1>Non-linearly Separable Example</h1>
-<div class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>weight3 <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>history3 <span class="op">=</span> [] </span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>max_steps <span class="op">=</span> <span class="dv">10000</span></span>
@@ -399,7 +399,7 @@ background-size: cover;
 </div>
 </div>
 <p>The score did not reach 1.0, so the perceptron algorithm wasn’t able to converge signifying that the data is not linearly separable.</p>
-<div class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.scatter(X3[:,<span class="dv">0</span>], X3[:,<span class="dv">1</span>], c <span class="op">=</span> y2)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Feature 1"</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Feature 2"</span>)</span>
@@ -420,7 +420,7 @@ background-size: cover;
 </div>
 </div>
 <p>Visualization of the perceptron’s resulting linear separator</p>
-<div class="cell" data-execution_count="10">
+<div class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.plot(p3.history) <span class="co">#plot is not representative of iterations (no such thing as .5 iterations) #gotta fix somehow w/ matplotlib adjusment probably</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Iteration"</span>)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Accuracy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -432,7 +432,7 @@ background-size: cover;
 </section>
 <section id="multi-dimensional-example" class="level1">
 <h1>Multi-Dimensional Example</h1>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>weight4 <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>history4 <span class="op">=</span> [] </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>max_steps <span class="op">=</span> <span class="dv">10000</span></span>
@@ -444,24 +444,25 @@ background-size: cover;
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>p_features4 <span class="op">=</span> <span class="dv">6</span> <span class="co">#the number of features ends up being 5 since we do n_features = p_features4 - 1 in make_blobs() call below</span></span>
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>X4, y4 <span class="op">=</span> make_blobs(n_samples <span class="op">=</span> n4, n_features <span class="op">=</span> p_features4 <span class="op">-</span> <span class="dv">1</span>, centers <span class="op">=</span> [(<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="fl">1.7</span>,<span class="op">-</span><span class="fl">1.5</span>, <span class="dv">0</span>, <span class="dv">0</span>), (<span class="fl">1.24</span>, <span class="fl">1.7</span>,<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>)]) <span class="co">#need to adjust centers to 5-dimensional space</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>X_4 <span class="op">=</span> np.append(X4, np.ones((X4.shape[<span class="dv">0</span>], <span class="dv">1</span>)), <span class="dv">1</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>p_features10 <span class="op">=</span> <span class="dv">3</span> <span class="co">#gives us 10 n_features</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>X10, y10 <span class="op">=</span> make_blobs(n_samples <span class="op">=</span> <span class="dv">200</span>, n_features <span class="op">=</span> p_features <span class="op">-</span> <span class="dv">1</span>, centers <span class="op">=</span> [(<span class="op">-</span><span class="fl">0.7</span>, <span class="op">-</span><span class="dv">1</span>, <span class="fl">0.2</span>, <span class="fl">0.1</span>, <span class="dv">2</span> , <span class="fl">0.4</span>, <span class="fl">0.3</span> , <span class="dv">2</span>, <span class="fl">0.9</span>, <span class="dv">1</span>), (<span class="fl">0.7</span>, <span class="dv">1</span>, <span class="op">-</span><span class="fl">0.2</span>, <span class="op">-</span><span class="fl">0.1</span>, <span class="op">-</span><span class="fl">0.3</span>, <span class="op">-</span><span class="fl">0.4</span>, <span class="op">-</span><span class="fl">0.3</span> , <span class="op">-</span><span class="fl">0.6</span>, <span class="op">-</span><span class="fl">0.9</span>, <span class="op">-</span><span class="dv">1</span>)])</span>
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X4.shape) <span class="co">#to check that our data is multi-dimensional (5-dimensions in this case) as intended, meaning there are 5 features recorded for each sample.</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X10.shape) <span class="co">#to check that our data is multi-dimensional (5-dimensions in this case) as intended, meaning there are 5 features recorded for each sample.</span></span>
 <span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>p4.fit(X4,y4, max_steps)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>p4.fit(X10,y10, max_steps)</span>
 <span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(p4.history[<span class="op">-</span><span class="dv">10</span>:])</span>
 <span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(p4.w)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(100, 5)
-[0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 1.0]
-[4.13255343 3.42143787 1.49084004 0.05145049 0.44583831 0.3426921 ]</code></pre>
+<pre><code>(200, 10)
+[0.995, 0.995, 0.995, 0.995, 0.995, 0.995, 0.995, 0.995, 0.995, 1.0]
+[ 3.01593611  4.9321606   1.38926737  2.26108177 -3.32174363 -2.79359171
+ -2.39895371 -5.18644807 -1.71482216 -5.7152505   7.2800442 ]</code></pre>
 </div>
 </div>
 <p>In this example the perceptron algorithm reaches a score of 1.0, meaning it was able to succesfully linearly separate the data, even in more than 2 dimensions (5 in this experiment).</p>
-<div class="cell" data-execution_count="12">
+<div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.plot(p4.history) <span class="co">#plot is not representative of iterations (no such thing as .5 iterations) #gotta fix somehow w/ matplotlib adjusment probably</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Iteration"</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Accuracy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
