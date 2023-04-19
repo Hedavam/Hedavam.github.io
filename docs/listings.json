@@ -2,9 +2,12 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/Classifying Palmer Penguins - ML Workflow/index.html",
-      "/posts/Linear Regression/Untitled.html",
+      "/posts/Unsupervised Learning with Linear Algebra/index.html",
       "/posts/Optimization for Logistic Regression/index.html",
+      "/posts/Learning from Timnit Gebru/index.html",
+      "/posts/Classifying Palmer Penguins - ML Workflow/index.html",
+      "/posts/Auditing Allocative Bias/index.html",
+      "/posts/Linear Regression/index.html",
       "/posts/Perceptron-Blog-Post/index.html",
       "/posts/example-blog-post/index.html"
     ]
