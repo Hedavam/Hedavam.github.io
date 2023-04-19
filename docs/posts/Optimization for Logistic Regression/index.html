@@ -236,7 +236,7 @@ background-size: cover;
 <section id="stochastic" class="level2">
 <h2 class="anchored" data-anchor-id="stochastic">Stochastic</h2>
 <p>Stochastic gradient descent also makes use of all the training data (every epoch), but divides it into batches to compute gradients and take steps with this gradient for this batches. This process is repeated for the remaining batches of the training data. The hypermarameter in this algorithm is the size of the batches.</p>
-<div class="cell" data-execution_count="295">
+<div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -250,7 +250,7 @@ background-size: cover;
 </section>
 <section id="batch-gradient-descent-example" class="level1">
 <h1>Batch Gradient Descent Example</h1>
-<div class="cell" data-execution_count="296">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make the data</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>p_features <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> make_blobs(n_samples <span class="op">=</span> <span class="dv">200</span>, n_features <span class="op">=</span> p_features <span class="op">-</span> <span class="dv">1</span>, centers <span class="op">=</span> [(<span class="op">-</span><span class="fl">0.7</span>, <span class="op">-</span><span class="dv">1</span>), (<span class="fl">0.7</span>, <span class="dv">1</span>)])</span>
@@ -262,13 +262,13 @@ background-size: cover;
 <p><img src="index_files/figure-html/cell-3-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>weight <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>empirical_risk_history <span class="op">=</span> []</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>score_hist <span class="op">=</span> []</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> LogisticRegression(weight, empirical_risk_history, score_hist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="75">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fit the model</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>LR.fit(X, y, alpha <span class="op">=</span> <span class="fl">.01</span>, max_epochs <span class="op">=</span> <span class="dv">1000</span>) <span class="co">#alpha is the size of our steps; #epochs is our number of steps; trade-off between the two interesting</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -290,37 +290,37 @@ background-size: cover;
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> draw_line(LR.w, <span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Conveged
-with a paramter vector of [ 1.64262229  1.90006992 -0.14210188]
-Algorithm converged after 1595 iterations</code></pre>
+with a paramter vector of [ 1.65690421  2.6592413  -0.13685123]
+Algorithm converged after 664 iterations</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="index_files/figure-html/cell-5-output-2.png" class="img-fluid"></p>
 </div>
 </div>
 <p>Visualization of the linear regression’s (with batch gradient descent) resulting linear separator</p>
-<div class="cell" data-execution_count="46">
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(LR.loss_history[<span class="op">-</span><span class="dv">10</span>:])</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(LR.score_history[<span class="op">-</span><span class="dv">10</span>:])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[0.23608955990515632, 0.23608301889647387, 0.23607705340343085, 0.23607166112559427, 0.23606683977370524, 0.23606258706961838, 0.23605890074624278, 0.23605577854748228, 0.2360532182281767, 0.2360512175540433]
-[0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9]</code></pre>
+<pre><code>[0.21368107742344108, 0.21367578489869984, 0.21367090291582383, 0.21366642995530682, 0.21366236450495152, 0.2136587050598277, 0.21365545012223122, 0.21365259820164284, 0.21365014781468727, 0.21364809748509303]
+[0.935, 0.935, 0.93, 0.93, 0.93, 0.93, 0.93, 0.93, 0.93, 0.93]</code></pre>
 </div>
 </div>
 </section>
 <section id="stochastic-gradient-descent-example" class="level1">
 <h1>Stochastic Gradient Descent Example</h1>
-<div class="cell" data-execution_count="74">
+<div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#fit the model</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>LR.fit_stochastic(X, y, alpha <span class="op">=</span> <span class="fl">0.1</span>, max_epochs <span class="op">=</span> <span class="dv">200</span>, batch_size <span class="op">=</span> <span class="dv">100</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"with a paramter vector of "</span> <span class="op">+</span> <span class="bu">str</span>(LR.w)) <span class="co"># inspect the fitted value of w</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Algorithm converged after "</span> <span class="op">+</span> <span class="bu">str</span>(<span class="bu">len</span>(LR.loss_history)) <span class="op">+</span> <span class="st">" iterations"</span>) <span class="co">#number of iterations it took algo. to converge</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Converged
-with a paramter vector of [ 1.57174286  1.82323125 -0.19426406]
-Algorithm converged after 939 iterations</code></pre>
+with a paramter vector of [1.66560371 2.47663612 0.19391676]
+Algorithm converged after 750 iterations</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="60">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c <span class="op">=</span> y)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Feature 1"</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Feature 2"</span>)</span>
@@ -338,12 +338,12 @@ Algorithm converged after 939 iterations</code></pre>
 </div>
 </div>
 <p>Visualization of the linear regression’s (w/ batch gradient descent) resulting linear separator</p>
-<div class="cell" data-execution_count="61">
+<div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(LR.loss_history[<span class="op">-</span><span class="dv">10</span>:])</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(LR.score_history[<span class="op">-</span><span class="dv">10</span>:])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[0.23545463246685344, 0.2354470158125811, 0.23544008859391663, 0.23543384780483187, 0.23542829045493036, 0.2354234135693584, 0.23541921418871603, 0.235415689368969, 0.2354128361813611, 0.2354106517123269]
-[0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9]</code></pre>
+<pre><code>[0.21881463654047928, 0.21862614050226867, 0.2184392184456595, 0.2182587488438184, 0.21808195275421505, 0.21790986260736267, 0.2177438122610745, 0.21757944141182547, 0.21741869240721862, 0.21726187710065234]
+[0.935, 0.935, 0.935, 0.935, 0.935, 0.935, 0.935, 0.935, 0.935, 0.935]</code></pre>
 </div>
 </div>
 <section id="take-away-both-optimization-methods-for-logistic-regression-result-in-similar-linear-separators." class="level3">
