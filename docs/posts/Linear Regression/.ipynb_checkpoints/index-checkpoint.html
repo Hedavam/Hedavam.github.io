@@ -247,7 +247,7 @@ background-size: cover;
 <h3 class="anchored" data-anchor-id="gradient-descent-approach">Gradient Descent Approach</h3>
 <p>Our gradient represents our descent direction. To do gradient descent, we iteratively calculate the gradient and adjust our parameter vector accordingly (param. vector - learning rate * grad). Thus, every iteration we move in descent direction until our algorithm converges (gradient = 0). The learning rate hyperparameter controls the speed of our descent.</p>
 <p>For more info on gradient descent, reference this previous blog post: <a href="https://hedavam.github.io/posts/Optimization%20for%20Logistic%20Regression/">Optimization with Gradient Descent Blog Post</a></p>
-<div class="cell" data-execution_count="43">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -256,7 +256,7 @@ background-size: cover;
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_blobs</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> linearRegression <span class="im">import</span> LinearRegression</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="44">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This function helps modify our given feature array by adding column of 1's </span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pad(X):</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.append(X, np.ones((X.shape[<span class="dv">0</span>], <span class="dv">1</span>)), <span class="dv">1</span>)</span>
@@ -274,7 +274,7 @@ background-size: cover;
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X_train, y_train, X_val, y_val</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="45">
+<div class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#choose # of samples and features</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>n_train <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>n_val <span class="op">=</span> <span class="dv">100</span></span>
@@ -286,13 +286,13 @@ background-size: cover;
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#create some data</span></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>X_train, y_train, X_val, y_val <span class="op">=</span> LR_data(n_train, n_val, p_features, noise)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="46">
+<div class="cell" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create instance of our LinearRegression class</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>weight <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>score_history <span class="op">=</span> []</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>lr <span class="op">=</span> LinearRegression(weight, score_history)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="47">
+<div class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>lr.fit_gradient(X_train, y_train, alpha <span class="op">=</span> <span class="fl">0.095</span>, max_epochs <span class="op">=</span> <span class="dv">2000</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"with a parameter vector of "</span> <span class="op">+</span> <span class="bu">str</span>(lr.w)) <span class="co"># inspect the fitted value of w</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Algorithm converged after "</span> <span class="op">+</span> <span class="bu">str</span>(<span class="bu">len</span>(lr.score_history)) <span class="op">+</span> <span class="st">" iterations"</span>) </span>
@@ -301,22 +301,22 @@ background-size: cover;
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Analytic approach obtains a parameter vector of "</span> <span class="op">+</span> <span class="bu">str</span>(lr.w))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Gradient approach conveged
-with a parameter vector of [0.60798014 1.1402506 ]
-Algorithm converged after 940 iterations
+with a parameter vector of [0.59672524 0.68252577]
+Algorithm converged after 1136 iterations
 
-Analytic approach obtains a parameter vector of [0.60798022 1.14025056]</code></pre>
+Analytic approach obtains a parameter vector of [0.59672531 0.68252573]</code></pre>
 </div>
 </div>
 <p>Both linear regression fit methods produce a nearly identical parameter vector.</p>
-<div class="cell" data-execution_count="48">
+<div class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Training score = </span><span class="sc">{</span>lr<span class="sc">.</span>score(X_train, y_train)<span class="sc">.</span><span class="bu">round</span>(<span class="dv">4</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Validation score = </span><span class="sc">{</span>lr<span class="sc">.</span>score(X_val, y_val)<span class="sc">.</span><span class="bu">round</span>(<span class="dv">4</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Training score = 0.9001
-Validation score = 0.9393</code></pre>
+<pre><code>Training score = 0.9446
+Validation score = 0.9139</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="49">
+<div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Visualize the data and linear regression fits</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>fig, axarr <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, sharex <span class="op">=</span> <span class="va">True</span>, sharey <span class="op">=</span> <span class="va">True</span>)</span>
@@ -341,7 +341,7 @@ Validation score = 0.9393</code></pre>
 </div>
 </div>
 <p>Model does a good job on both the training and validation data.</p>
-<div class="cell" data-execution_count="50">
+<div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.plot(lr.score_history)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plt.ylim([<span class="dv">0</span>, <span class="dv">1</span>])</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> plt.gca().<span class="bu">set</span>(title <span class="op">=</span> <span class="st">"Score vs. Iterations"</span>, xlabel <span class="op">=</span> <span class="st">"# of Iterations"</span>, ylabel <span class="op">=</span> <span class="st">"Score"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -355,7 +355,7 @@ Validation score = 0.9393</code></pre>
 </section>
 <section id="experiments" class="level1">
 <h1>Experiments</h1>
-<div class="cell" data-execution_count="51">
+<div class="cell" data-execution_count="66">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#choose # of samples and features</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>n_train <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>n_val <span class="op">=</span> <span class="dv">100</span></span>
@@ -400,7 +400,7 @@ Validation score = 0.9393</code></pre>
 <section id="lasso-regularization" class="level2">
 <h2 class="anchored" data-anchor-id="lasso-regularization">LASSO Regularization</h2>
 <p>LASSO adds a regularization term to our parameter vector, which shrinks the parameter vector’s weights associated with less important features (even to 0), which helps combat overfitting as our number of features increases. This may be used for feature selection and is useful when we have more features than samples (overparameterized problems).</p>
-<div class="cell" data-execution_count="52">
+<div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#choose # of samples and features</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>n_train <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>n_val <span class="op">=</span> <span class="dv">100</span></span>
@@ -468,7 +468,7 @@ Validation score = 0.9393</code></pre>
 <section id="take-away-lasso-regularization-has-improved-perfomance-for-overparametrized-problems" class="level3">
 <h3 class="anchored" data-anchor-id="take-away-lasso-regularization-has-improved-perfomance-for-overparametrized-problems">Take-away: LASSO Regularization has improved perfomance for overparametrized problems</h3>
 <p>Our linear regression implementation matches up well with Sklearn’s LASSO up until the number of features gets close to the number of samples, at which point the validation score of our non-regularized model plummets while LASSO’s validation score stays above 0.</p>
-<div class="cell" data-execution_count="53">
+<div class="cell" data-execution_count="118">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>num_steps <span class="op">=</span> <span class="bu">len</span>(lasso_score_hist)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>plt.plot(np.arange(num_steps) <span class="op">+</span> <span class="dv">1</span>, lasso_score_hist, label <span class="op">=</span> <span class="st">"alpha = 0.001"</span>)</span>
@@ -496,13 +496,13 @@ Validation score = 0.9393</code></pre>
 <p>We will try to use our model to predict the number of casual riders (target vector) on a given day based on the features (like temperature or month) in our data that impact it.</p>
 <section id="import-data" class="level4">
 <h4 class="anchored" data-anchor-id="import-data">Import Data</h4>
-<div class="cell" data-execution_count="54">
+<div class="cell" data-execution_count="243">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>bikeshare <span class="op">=</span> pd.read_csv(<span class="st">"https://philchodrow.github.io/PIC16A/datasets/Bike-Sharing-Dataset/day.csv"</span>)</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>bikeshare.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="54">
+<div class="cell-output cell-output-display" data-execution_count="243">
 
 <div>
 
@@ -632,7 +632,7 @@ Validation score = 0.9393</code></pre>
 </section>
 <section id="visualize-data" class="level4">
 <h4 class="anchored" data-anchor-id="visualize-data">Visualize Data</h4>
-<div class="cell" data-execution_count="55">
+<div class="cell" data-execution_count="244">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import datetime</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, figsize <span class="op">=</span> (<span class="dv">7</span>, <span class="dv">3</span>))</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>ax.plot(pd.to_datetime(bikeshare[<span class="st">'dteday'</span>]), bikeshare[<span class="st">'casual'</span>])</span>
@@ -645,7 +645,7 @@ Validation score = 0.9393</code></pre>
 </section>
 <section id="feature-engineering" class="level4">
 <h4 class="anchored" data-anchor-id="feature-engineering">Feature-engineering</h4>
-<div class="cell" data-execution_count="56">
+<div class="cell" data-execution_count="245">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> [<span class="st">"casual"</span>, </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">"mnth"</span>, </span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"weathersit"</span>, </span>
@@ -660,7 +660,7 @@ Validation score = 0.9393</code></pre>
 <span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>bikeshare <span class="op">=</span> pd.get_dummies(bikeshare, columns <span class="op">=</span> [<span class="st">'mnth'</span>], drop_first <span class="op">=</span> <span class="st">"if_binary"</span>)</span>
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>bikeshare.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="56">
+<div class="cell-output cell-output-display" data-execution_count="245">
 
 <div>
 
@@ -805,7 +805,7 @@ Validation score = 0.9393</code></pre>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="57">
+<div class="cell" data-execution_count="255">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>train, test <span class="op">=</span> train_test_split(bikeshare, test_size <span class="op">=</span> <span class="fl">.2</span>, shuffle <span class="op">=</span> <span class="va">False</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>X_train_bike <span class="op">=</span> train.drop([<span class="st">"casual"</span>], axis <span class="op">=</span> <span class="dv">1</span>)</span>
@@ -824,7 +824,7 @@ Validation score = 0.9393</code></pre>
 </section>
 <section id="model-training-perfomance" class="level4">
 <h4 class="anchored" data-anchor-id="model-training-perfomance">Model Training + Perfomance</h4>
-<div class="cell" data-execution_count="58">
+<div class="cell" data-execution_count="265">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>lr_bike <span class="op">=</span> LinearRegression(weight, score_history)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>lr_bike.fit_gradient(normalized_X_train_bike, y_train_bike, alpha <span class="op">=</span> <span class="fl">0.095</span>, max_epochs <span class="op">=</span> <span class="dv">2000</span>)</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -837,7 +837,7 @@ Validation score = 0.9393</code></pre>
 </div>
 </div>
 <p>Our model does a decent job of predicting the number of casual bikers on a given day as we reach an accuracy of approximately 70%.</p>
-<div class="cell" data-execution_count="59">
+<div class="cell" data-execution_count="257">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> lr_bike.predict(normalized_X_train_bike)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>actual <span class="op">=</span> y_train_bike</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -911,7 +911,7 @@ Validation score = 0.9393</code></pre>
 <h3 class="anchored" data-anchor-id="note-scale-can-impact-coefficients-so-we-used-normalized-training-data-to-fit-our-model-earlier.">NOTE: Scale can impact coefficients, so we used normalized training data to fit our model earlier.</h3>
 <p>https://scikit-learn.org/stable/auto_examples/inspection/plot_linear_model_coefficient_interpretation.html# https://inria.github.io/scikit-learn-mooc/python_scripts/dev_features_importance.html#linear-model-inspection</p>
 <p>Weights in our parameter vector with positive coefficients usually suggest that their corresponding features positively impact our predictions of ridership.</p>
-<div class="cell" data-execution_count="60">
+<div class="cell" data-execution_count="259">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Features: "</span> <span class="op">+</span> <span class="bu">str</span>(X_train_bike.columns))</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(suppress<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>mod_lr_bike <span class="op">=</span> lr_bike.w[:<span class="op">-</span><span class="dv">1</span>] <span class="co">#take out last column because it's the bias? yea</span></span>
@@ -927,14 +927,14 @@ Weights: [ -59.20691376 -367.77442788  135.83853919  281.96835486  -72.43243238
    98.10888815   55.72477025   20.36188519]</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="61">
+<div class="cell" data-execution_count="260">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sorted_ascend_params <span class="op">=</span> np.argsort(mod_lr_bike) <span class="co">#Returns the indices that would sort an array in ascending order</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>sorted_descend_params <span class="op">=</span> <span class="bu">list</span>(<span class="bu">reversed</span>(sorted_ascend_params))</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Top 5 features that contribute the most to increased ridership as determined by our model:"</span>)</span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_train_bike.columns[sorted_descend_params[:<span class="dv">5</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Top 5 features that contribute the most to increased ridership as determined by our model:
+<pre><code>Top 5 features that contribute the most to ridership as determined by our model:
 Index(['temp', 'mnth_5', 'mnth_4', 'yr', 'mnth_3'], dtype='object')</code></pre>
 </div>
 </div>
