@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Hedavam Solano">
+<meta name="dcterms.date" content="2023-05-23">
+<meta name="description" content="A blog post where we do image compression with the singular value decomposition.">
 
-<title>My Awesome CSCI 0451 Blog – index</title>
+<title>My Awesome CSCI 0451 Blog - Unsupervised Learning with Linear Algebra</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +23,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -106,7 +172,39 @@ background-size: cover;
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Unsupervised Learning with Linear Algebra</h1>
+                  <div>
+        <div class="description">
+          A blog post where we do image compression with the singular value decomposition.
+        </div>
+      </div>
+                </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Hedavam Solano </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">May 23, 2023</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
@@ -116,7 +214,231 @@ background-size: cover;
 
 
 
+<section id="overview" class="level1">
+<h1>Overview</h1>
+<p>Useful Resources: - https://middlebury-csci-0451.github.io/CSCI-0451/assignments/blog-posts/blog-post-image-processing.html - https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/introducing-dimensionality-reduction.html - https://towardsdatascience.com/svd-8c2f72e264f</p>
+<p>Unlike supervised learning, unsupervised learning tasks do not have targets. Rather, they focus on finding patterns within the data.</p>
+<p>Singular Value Decomposition (SVD) is a matrix factorization method that can allow us to do dimensionality reduction, a form of unsupervised learning that focuses on reducing the number of features in our data while preserving its essence for more efficient analysis.</p>
+<p>The decomposition relies on calculating “singular values” that help us estimate the size of the original matrix with less info as is explained in the article(https://towardsdatascience.com/svd-8c2f72e264f):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/2b872599-2275-44a5-b35c-03c7f8a0662a.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">image.png</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="experiment" class="level1">
+<h1>Experiment</h1>
+<p>Overall goal: - Decompose an image of our choice using SVD. - Experiment with different # k of singular value components to be used in the decomposition - Develop compression factor parameter that if enabled will choose the # k of singular value components to be used in the decomposition.</p>
+<p>Useful Resource: https://medium.com/<span class="citation" data-cites="thusharabandara/measure-the-compression-performance-of-an-image-compression-algorithm-ea68c1839ec6">@thusharabandara/measure-the-compression-performance-of-an-image-compression-algorithm-ea68c1839ec6</span></p>
+<section id="fetching-image-turning-it-to-black-white" class="level3">
+<h3 class="anchored" data-anchor-id="fetching-image-turning-it-to-black-white">Fetching Image + Turning it to Black &amp; White</h3>
+<div class="cell" data-execution_count="396">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> PIL</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_image(url):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(PIL.Image.<span class="bu">open</span>(urllib.request.urlopen(url)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="387">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://tinypng.com/images/social/website.jpg"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> read_image(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="388">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fig, axarr <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize <span class="op">=</span> (<span class="dv">7</span>, <span class="dv">3</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> to_greyscale(im):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">-</span> np.dot(im[...,:<span class="dv">3</span>], [<span class="fl">0.2989</span>, <span class="fl">0.5870</span>, <span class="fl">0.1140</span>])</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>grey_img <span class="op">=</span> to_greyscale(img)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">0</span>].imshow(img)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">0</span>].axis(<span class="st">"off"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">0</span>].<span class="bu">set</span>(title <span class="op">=</span> <span class="st">"original"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">1</span>].imshow(grey_img, cmap <span class="op">=</span> <span class="st">"Greys"</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">1</span>].axis(<span class="st">"off"</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">1</span>].<span class="bu">set</span>(title <span class="op">=</span> <span class="st">"greyscale"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="388">
+<pre><code>[Text(0.5, 1.0, 'greyscale')]</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-4-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="decomposition-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="decomposition-analysis">Decomposition + Analysis</h3>
+<p>In the following function, we will pass our black and white image, decompose it and examine results.</p>
+<div class="cell" data-execution_count="494">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> svd_reconstruct(image, k, cf<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    A <span class="op">=</span> image <span class="co">#our image is m*n matrix</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    U, sigma, V <span class="op">=</span> np.linalg.svd(A)<span class="co">#decompose with built in numpy svd</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    m,n <span class="op">=</span> image.shape[<span class="dv">0</span>], image.shape[<span class="dv">1</span>]</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    og_img_px <span class="op">=</span> m<span class="op">*</span>n</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"The # of pixels needed to store original image is </span><span class="sc">{</span>og_img_px<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create the D matrix in the SVD</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    D <span class="op">=</span> np.zeros_like(A,dtype<span class="op">=</span><span class="bu">float</span>) <span class="co"># matrix of zeros of same shape as A</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    D[:<span class="bu">min</span>(A.shape),:<span class="bu">min</span>(A.shape)] <span class="op">=</span> np.diag(sigma) <span class="co"># singular values on the main diagonal</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Calculating Compression Factor</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">#compression factor is orinal/compressed </span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">#original = A; compressed = A_</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">#A = m*n</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">#A_ = k*m + k(diagonals matrix is 0'd out so use k instead of k*k) + n*k</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">#cf = A/A_</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">#cf = m*n/k*m + k + n*k</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">#cf = m*n/k(m+1+n)</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">#cf(m+1+n) = m*n/k</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">#k*cf(m+1+n)= m*n</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">#k = m*n/cf(m+1+n)</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    choose_k <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(cf <span class="op">!=</span> <span class="va">None</span>):</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>        choose_k <span class="op">=</span> <span class="bu">int</span>(((m<span class="op">*</span>n) <span class="op">/</span> (cf <span class="op">*</span> (m<span class="op">+</span><span class="dv">1</span><span class="op">+</span>n))))</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (choose_k <span class="op">&gt;</span> <span class="dv">0</span>):</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>        U_ <span class="op">=</span> U[:,:choose_k]</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>        D_ <span class="op">=</span> D[:choose_k, :choose_k]</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>        V_ <span class="op">=</span> V[:choose_k, :]</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>        A_ <span class="op">=</span> U_ <span class="op">@</span> D_ <span class="op">@</span> V_</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>        new_img_px <span class="op">=</span> choose_k<span class="op">*</span>m <span class="op">+</span> choose_k <span class="op">+</span> n<span class="op">*</span>choose_k</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"The # of pixels needed to store compressed image is </span><span class="sc">{</span>new_img_px<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> A_</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>    U_ <span class="op">=</span> U[:,:k]</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>    D_ <span class="op">=</span> D[:k, :k]</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>    V_ <span class="op">=</span> V[:k, :]</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>    A_ <span class="op">=</span> U_ <span class="op">@</span> D_ <span class="op">@</span> V_</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>    new_img_px <span class="op">=</span> k<span class="op">*</span>m <span class="op">+</span> k <span class="op">+</span> n<span class="op">*</span>k</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"The # of pixels needed to store compressed image is </span><span class="sc">{</span>new_img_px<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>     </span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> A_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="495">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#compare original size to new size</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>svd_reconstruct(grey_img,<span class="dv">25</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>svd_reconstruct(grey_img,<span class="dv">8</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>svd_reconstruct(grey_img,<span class="dv">8</span>, cf <span class="op">=</span> <span class="dv">70</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>svd_reconstruct(grey_img,<span class="dv">8</span>, cf <span class="op">=</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The # of pixels needed to store original image is 520200
+The # of pixels needed to store compressed image is 38275
 
+The # of pixels needed to store original image is 520200
+The # of pixels needed to store compressed image is 12248
+
+The # of pixels needed to store original image is 520200
+The # of pixels needed to store compressed image is 6124
+
+The # of pixels needed to store original image is 520200
+The # of pixels needed to store compressed image is 102577
+</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="495">
+<pre><code>array([[-166.58691639, -166.83674027, -171.06369029, ...,  -74.47347323,
+        -102.7494874 , -129.49640076],
+       [-171.05893064, -171.90815828, -177.41906167, ...,  -56.2651186 ,
+         -92.05222797, -121.56358122],
+       [-178.59615127, -178.46205866, -183.14545662, ...,  -51.42475947,
+         -90.07937304, -121.04338246],
+       ...,
+       [ -89.64106677,  -82.82397266,  -87.57796423, ..., -105.63327921,
+        -130.67409141, -140.58034411],
+       [ -81.86134331,  -74.64474276,  -79.75364623, ..., -105.92576626,
+        -123.65154946, -127.40840671],
+       [ -80.18976813,  -72.07005171,  -77.28038033, ..., -101.24308323,
+        -118.08228953, -119.9544055 ]])</code></pre>
+</div>
+</div>
+<section id="take-aways" class="level4">
+<h4 class="anchored" data-anchor-id="take-aways">Take-Aways:</h4>
+<ul>
+<li>The higher the k, the less compression is done.</li>
+<li>The higher the compression factor, the smaller the k, so more compression is done.</li>
+</ul>
+</section>
+</section>
+<section id="effect-of-decomposition" class="level3">
+<h3 class="anchored" data-anchor-id="effect-of-decomposition">Effect of Decomposition</h3>
+<p>In the following function, we will use our svd_reconstruct() function to perform an experiment in which we iteratively increase the # k of singular value components to be used in the decomposition and see how it affects image quality and storage.</p>
+<div class="cell" data-execution_count="496">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> svd_experiment(image):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#arrays to store compressed images, scores</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    img_array <span class="op">=</span> []</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    score_calc <span class="op">=</span> []</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Calculating Compression Rate</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#compression rate is compressed/original </span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    m,n <span class="op">=</span> image.shape[<span class="dv">0</span>], image.shape[<span class="dv">1</span>]</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    original_image_pixels <span class="op">=</span> m <span class="op">*</span> n </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>,<span class="dv">56</span>,<span class="dv">10</span>): <span class="co">#i is the k</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        img_array.append(svd_reconstruct(image, k <span class="op">=</span> i))</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">#compression ratio</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        reduced_image_pixels <span class="op">=</span> (m <span class="op">*</span> i) <span class="op">+</span> i <span class="op">+</span> (i<span class="op">*</span>n)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        score_calc.append((reduced_image_pixels <span class="op">/</span> original_image_pixels<span class="op">*</span><span class="dv">100</span>))</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    fig, axarr <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">15</span>,<span class="dv">5</span>), sharex <span class="op">=</span> <span class="va">False</span>, sharey <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">#indices</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    img_index <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    component_index <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">#loop through subplots</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    axarr <span class="op">=</span> axarr.flatten()</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> a <span class="kw">in</span> axarr:</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>        a.imshow(img_array[img_index], interpolation<span class="op">=</span><span class="st">'none'</span>, cmap <span class="op">=</span> <span class="st">"Greys"</span>)</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>        a.axis(<span class="st">"off"</span>)</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>        a.<span class="bu">set</span>(title <span class="op">=</span> <span class="bu">str</span>(component_index) <span class="op">+</span> <span class="st">" components, "</span> <span class="op">+</span> <span class="st">"storage: "</span> <span class="op">+</span> <span class="bu">str</span>(<span class="bu">round</span>((score_calc[img_index]), <span class="dv">4</span>)) <span class="op">+</span> <span class="st">"%"</span>)</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>        component_index <span class="op">=</span> component_index <span class="op">+</span> <span class="dv">10</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>        img_index <span class="op">=</span> img_index <span class="op">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="497">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>svd_experiment(grey_img)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The # of pixels needed to store original image is 520200
+The # of pixels needed to store compressed image is 7655
+
+The # of pixels needed to store original image is 520200
+The # of pixels needed to store compressed image is 22965
+
+The # of pixels needed to store original image is 520200
+The # of pixels needed to store compressed image is 38275
+
+The # of pixels needed to store original image is 520200
+The # of pixels needed to store compressed image is 53585
+
+The # of pixels needed to store original image is 520200
+The # of pixels needed to store compressed image is 68895
+
+The # of pixels needed to store original image is 520200
+The # of pixels needed to store compressed image is 84205
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-8-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<section id="take-away-with-only-about-16-of-the-pixels-available-from-original-matrix-being-used-to-display-the-image-it-is-almost-undistinguishable-from-the-original-image-which-shows-the-power-of-dimensionality-reduction." class="level4">
+<h4 class="anchored" data-anchor-id="take-away-with-only-about-16-of-the-pixels-available-from-original-matrix-being-used-to-display-the-image-it-is-almost-undistinguishable-from-the-original-image-which-shows-the-power-of-dimensionality-reduction.">Take-Away: With only about 16% of the pixels available from original matrix being used to display the image, it is almost undistinguishable from the original image, which shows the power of dimensionality reduction.</h4>
+
+
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
